@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      [class.is-invalid]="submitted && f['name'].errors"
+    />
+    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+      Name is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      [class.is-invalid]="submitted && f['email'].errors"
+    />
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+      Email is required and must be valid.
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      [class.is-invalid]="submitted && f['password'].errors"
+    />
+    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+      Password is required and must be at least 6 characters.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'IoTFrontend';
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Aquí puedes realizar una inicialización de rutas, si es necesario
+   // this.router.config = [...appRoutes, ...serverRoutes];  // Configura las rutas de cliente y servidor
+  }
 }

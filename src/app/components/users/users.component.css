@@ -1,0 +1,16 @@
+/* Estilos básicos para el formulario */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .invalid-feedback {
+    display: block;
+    color: #dc3545;
+  }
+  
