@@ -1,0 +1,23 @@
+/* Asegurar que el sidebar tenga una altura completa y un ancho fijo */
+.d-flex.flex-column {
+  width: 250px;
+  border-right: 1px solid #ddd;
+}
+
+/* Estilo adicional para los enlaces del sidebar */
+.nav-link {
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Estilo para el enlace activo */
+.nav-link.active {
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+}

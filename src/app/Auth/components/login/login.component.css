@@ -1,0 +1,22 @@
+.container {
+  margin-top: 5%;
+}
+
+h2 {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 0.25rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.alert {
+  font-size: 0.9rem;
+}
+

@@ -2,3 +2,55 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* styles.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.background {
+  background-image: url('./assets/images/iot_background.jpg'); /* Ruta del fondo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flow-root;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo básico para el sidebar y el body */
+.sidebar {
+  width: 250px;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  background-color: #f8f9fa;
+  padding-top: 20px;
+}
+
+.body-container {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.navbar-nav {
+  padding-left: 10px;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.content {
+  padding: 20px;
+}
