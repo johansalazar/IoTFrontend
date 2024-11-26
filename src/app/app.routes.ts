@@ -9,17 +9,27 @@ import { ServerComponent } from './Auth/components/servers/server.component';
 import { MqttComponent } from './Auth/components/mqtt/mqtt.component';
 import { UsersComponent } from './Auth/components/users/users.component';
 import { AuthGuard } from './Auth/guards/auth.guard';
+import { BodyComponent } from './Shared/body/body.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
-    { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard] },
-    { path: 'devices', component: DevicesComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
-    { path: 'server', component: ServerComponent, canActivate: [AuthGuard] },
-    { path: 'mqtt', component: MqttComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: UsersComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: '',
+    component: BodyComponent,
+    canActivate: [AuthGuard], // Protege rutas detrás del login
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'welcome', component: WelcomeComponent },
+      { path: 'locations', component: LocationsComponent },
+      { path: 'devices', component: DevicesComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'report', component: ReportComponent },
+      { path: 'server', component: ServerComponent },
+      { path: 'mqtt', component: MqttComponent },
+    ],
+  },
+
+  { path: 'users', component: UsersComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

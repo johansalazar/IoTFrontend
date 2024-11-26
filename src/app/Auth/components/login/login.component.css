@@ -20,3 +20,18 @@ h2 {
   font-size: 0.9rem;
 }
 
+/* styles.css o login.component.css */
+.full-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/assets/images/iot_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flow-root;
+  justify-content: center;
+  align-items: center;
+}

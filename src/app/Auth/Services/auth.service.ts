@@ -8,44 +8,53 @@ import { AuthResponse } from '../Interfaces/AuthResponse';
 })
 export class AuthService {
   private readonly tokenKey = 'authToken';
-
-  private apiUrl = 'https://localhost:7159/api/v1/';
+  private readonly usernameKey = 'username';
+  private readonly apiUrl = 'https://localhost:7159/api/v1/';
 
   constructor(private http: HttpClient) {}
 
+  // Iniciar sesión
   login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.apiUrl + 'Auth/Login', {
+    return this.http.post<AuthResponse>(`${this.apiUrl}Auth/Login`, {
       email,
       password,
     });
   }
+
   // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
-    const token = localStorage.getItem(this.tokenKey);
-   // debugger;
-    if (typeof window !== 'undefined' && token != null) {
+    if (typeof window !== 'undefined' && localStorage) {
       const token = localStorage.getItem(this.tokenKey);
       return !!token; // Devuelve true si el token existe
     }
-    return false; // Devuelve false si no estás en el navegador
-  }
-  // Método para guardar el nombre del usuario en localStorage
-  setUserName(username: string) {
-   // debugger;
-    localStorage.setItem('username', username);
+    return false; // Retorna false si no estás en un navegador
   }
 
-  // Método para obtener el nombre del usuario
-  getUserName(): string {
-   // debugger;
-    return localStorage.getItem('username') || 'Invitado';
-  }
-  // Guardar el token en localStorage
   saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem(this.tokenKey, token);
+    }
   }
-  // Eliminar el token
+
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.removeItem(this.tokenKey);
+    }
+  }
+  // Obtener el nombre del usuario
+  getUserName(): string {
+    if (typeof window !== 'undefined' && localStorage) {
+      return localStorage.getItem('username') || 'Invitado';
+    }
+    return 'Invitado';
+  }
+
+  // Guardar el nombre del usuario
+  setUserName(username: string): void {
+    if (username && username.trim()) {
+      localStorage.setItem(this.usernameKey, username);
+    } else {
+      console.warn('El nombre de usuario no es válido.');
+    }
   }
 }

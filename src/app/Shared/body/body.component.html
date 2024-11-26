@@ -1,5 +1,11 @@
-<div class="body-container">
-  <div class="content">
-    <router-outlet></router-outlet> <!-- Aquí se mostrarán los otros componentes -->
+<div class="app-container">
+    <app-header></app-header>
+  <app-sidebar></app-sidebar>
+
+  <!-- Body donde se renderizan los componentes -->
+  <div class="body-container">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

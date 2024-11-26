@@ -1,0 +1,29 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.body-container {
+  flex: 1; /* Ocupa todo el espacio disponible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.sidebar {
+  transition: transform 0.3s ease;
+}
+
+.hide {
+  transform: translateX(-100%); /* Esto moverá el sidebar fuera de la pantalla */
+}
