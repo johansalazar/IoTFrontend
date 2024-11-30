@@ -1,0 +1,140 @@
+<div class="container w-100">
+  <div class="card shadow-sm">
+    <div class="card-header text-center bg-primary text-white">
+      <h2 class="fw-bold mb-0">Gestión de Dispositivos</h2>
+    </div>
+
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Lista de Dispositivos</h5>
+        <button class="btn btn-sm btn-primary" (click)="openAddModal()">
+          <i class="fa-solid fa-plus me-2"></i>Agregar Dispositivo
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Fecha Creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let device of devices" class="text-center">
+              <td>{{ device?.name }}</td>
+              <td>{{ device?.deviceType }}</td>
+              <td>
+                <span class="badge" [ngClass]="device?.estado ? 'bg-success' : 'bg-danger'">
+                  {{ device?.estado ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td>{{ device?.fechaCreacion | date:'short' }}</td>
+              <td>
+                <button class="btn btn-sm btn-success me-1" (click)="openViewModal(device)">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="btn btn-sm btn-warning me-1" (click)="openEditModal(device)">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="openDeleteConfirmationModal(device)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal CRUD -->
+  <div *ngIf="showModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{ modalTitle }}</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="deviceForm" (ngSubmit)="saveDevice()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input id="name" type="text" class="form-control" formControlName="name"
+                [class.is-invalid]="submitted && deviceForm.get('name')?.invalid" />
+              <div *ngIf="submitted && deviceForm.get('name')?.invalid" class="invalid-feedback">
+                El nombre es requerido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="deviceKey" class="form-label">Clave del Dispositivo</label>
+              <input id="deviceKey" type="text" class="form-control" formControlName="deviceKey"
+                [class.is-invalid]="submitted && deviceForm.get('deviceKey')?.invalid" />
+              <div *ngIf="submitted && deviceForm.get('deviceKey')?.invalid" class="invalid-feedback">
+                La clave es requerida.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="deviceType" class="form-label">Tipo de Dispositivo</label>
+              <input id="deviceType" type="text" class="form-control" formControlName="deviceType"
+                [class.is-invalid]="submitted && deviceForm.get('deviceType')?.invalid" />
+              <div *ngIf="submitted && deviceForm.get('deviceType')?.invalid" class="invalid-feedback">
+                El tipo es requerido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="idLocation" class="form-label">Ubicación Asociada</label>
+              <select id="idLocation" class="form-select" formControlName="idLocation"
+                [class.is-invalid]="submitted && deviceForm.get('idLocation')?.invalid">
+                <option value="" disabled selected>Selecciona una Ubicación</option>
+                <option *ngFor="let location of locationes" [value]="location.id">
+                  {{ location.nombre }}
+                </option>
+              </select>
+              <div *ngIf="submitted && deviceForm.get('idLocation')?.invalid" class="invalid-feedback">
+                Debes asociar una ubicación existente.
+              </div>
+            </div>
+
+            <div class="form-check mb-3">
+              <input id="estado" type="checkbox" class="form-check-input" formControlName="estado" />
+              <label for="estado" class="form-check-label">Estado</label>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancelar</button>
+              @if (!viewOk) {
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                }
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmación de Eliminación -->
+  <div *ngIf="showDeleteConfirmation" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Eliminar Dispositivo</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar el Dispositivo: {{ selectedDevice?.name }}?</p>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteDevice()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

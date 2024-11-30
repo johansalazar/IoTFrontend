@@ -1,15 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-/* styles.css */
-body, html {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
-}
+   font-family: Roboto, "Helvetica Neue", sans-serif;
+   }
 
 .background {
   background-image: url('./assets/images/iot_background.jpg'); /* Ruta del fondo */
@@ -17,40 +14,23 @@ body, html {
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
-  display: flow-root;
   justify-content: center;
   align-items: center;
 }
 
 /* Estilo básico para el sidebar y el body */
 .sidebar {
-  width: 250px;
-  position: fixed;
-  top: 50px;
-  left: 0;
-  bottom: 0;
-  background-color: #f8f9fa;
+  width: 180px;
+  top: 64px;
   padding-top: 20px;
+  padding-left: 20px;
+
 }
 
-.body-container {
-  margin-left: 250px;
-  padding: 20px;
+/* Para pantallas de tamaño pequeño (moviles) */
+@media (max-width: 768px) {
+  app-sidebar {
+    display: none; /* Ocultamos el sidebar en pantallas pequeñas */
+  }
 }
 
-.navbar-nav {
-  padding-left: 10px;
-}
-
-.nav-item {
-  margin-bottom: 10px;
-}
-
-.nav-link.active {
-  font-weight: bold;
-  color: #007bff;
-}
-
-.content {
-  padding: 20px;
-}

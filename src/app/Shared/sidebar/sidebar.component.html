@@ -1,30 +1,36 @@
-<div class="sidebar bg-light" [class.hide]="isSidebarHidden">
-  <nav class="navbar navbar-light">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" routerLink="/welcome" routerLinkActive="active-link">Bienvenida</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/locations" routerLinkActive="active-link">Ubicaciones</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/devices" routerLinkActive="active-link">Dispositivos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active-link">Tablero</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/report" routerLinkActive="active-link">Reportes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/server" routerLinkActive="active-link">Servidor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/mqtt" routerLinkActive="active-link">MQTT</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/users" routerLinkActive="active-link">Usuarios</a>
-      </li>
-    </ul>
-  </nav>
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px; border-radius: 0px 0px 5px 0px;">
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/welcome" routerLinkActive="active-link"><i
+          class="fa-solid fa-house"></i> Bienvenida</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/mqtt" routerLinkActive="active-link"><i class="fa-solid fa-key"></i>
+        MQTT</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/server" routerLinkActive="active-link"><i
+          class="fa-solid fa-server"></i> Servidor</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/locations" routerLinkActive="active-link"><i
+          class="fa-solid fa-location-dot"></i> Ubicaciones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/devices" routerLinkActive="active-link"><i
+          class="fa-solid fa-microchip"></i> Dispositivos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/dashboard" routerLinkActive="active-link"><i
+          class="fa-solid fa-chalkboard"></i> Tablero</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/report" routerLinkActive="active-link"> <i
+          class="fa-solid fa-microchip"></i> Reportes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/users" routerLinkActive="active-link"><i class="fa-solid fa-user"></i>
+        Usuarios</a>
+    </li>
+  </ul>
 </div>

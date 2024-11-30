@@ -1,0 +1,132 @@
+<div class="container w-100">
+  <div class="card shadow-sm">
+    <div class="card-header text-center bg-primary text-white">
+      <h2 class="fw-bold mb-0">Gestión de Servidores</h2>
+    </div>
+
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Lista de Servidores</h5>
+        <button class="btn btn-sm btn-primary" (click)="openAddModal()">
+          <i class="fa-solid fa-plus me-2"></i>Agregar Servidor
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>Nombre Host</th>
+              <th>IP</th>
+              <th>Estado</th>
+              <th>Fecha Creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let servidor of servidores" class="text-center">
+              <td>{{ servidor?.nombreHost }}</td>
+              <td>{{ servidor?.direccionIP }}</td>
+              <td>
+                <span class="badge" [ngClass]="servidor?.estado ? 'bg-success' : 'bg-danger'">
+                  {{ servidor?.estado ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td>{{ servidor?.fechaCreacion | date:'short' }}</td>
+              <td>
+                <button class="btn btn-sm btn-success me-1" (click)="openViewModal(servidor)">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="btn btn-sm btn-warning me-1" (click)="openEditModal(servidor)">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="openDeleteConfirmationModal(servidor)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal CRUD -->
+  <div *ngIf="showModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{ modalTitle }}</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="servidorForm" (ngSubmit)="saveServidor()">
+            <div class="mb-3">
+              <label for="nombreHost" class="form-label">Nombre Host</label>
+              <input id="nombreHost" type="text" class="form-control" formControlName="nombreHost"
+                [class.is-invalid]="submitted && servidorForm.get('nombreHost')?.invalid" />
+              <div *ngIf="submitted && servidorForm.get('nombreHost')?.invalid" class="invalid-feedback">
+                El nombre del host es requerido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="direccionIP" class="form-label">IP</label>
+              <input id="direccionIP" type="text" class="form-control" formControlName="direccionIP"
+                [class.is-invalid]="submitted && servidorForm.get('direccionIP')?.invalid" />
+              <div *ngIf="submitted && servidorForm.get('direccionIP')?.invalid" class="invalid-feedback">
+                La dirección IP es inválida.
+              </div>
+            </div>
+
+            <div class="form-check mb-3">
+              <input id="estado" type="checkbox" class="form-check-input" formControlName="estado" />
+              <label for="estado" class="form-check-label">Estado</label>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="idMQTT" class="form-label">MQTT Asociado (ID)</label>
+              <select id="idMQTT" class="form-select" formControlName="idMQTT"
+                [class.is-invalid]="submitted && servidorForm.get('idMQTT')?.invalid">
+                <option value="" disabled selected>Selecciona un MQTT</option>
+                <option *ngFor="let mqtt of mqtts" [value]="mqtt.id">
+                  {{ mqtt.direccionIPBroker }} ({{ mqtt.usuarioMQTT }})
+                </option>
+              </select>
+              <div *ngIf="submitted && servidorForm.get('idMQTT')?.invalid" class="invalid-feedback">
+                Debes asociar un MQTT existente.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancelar</button>
+              @if (!viewOk) {
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              }
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmación de Eliminación -->
+  <div *ngIf="showDeleteConfirmation" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Eliminar Servidor</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar el servidor con host: {{ selectedServidor?.nombreHost }}?</p>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteServidor()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

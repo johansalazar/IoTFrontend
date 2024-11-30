@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './Auth/components/login/login.component';
-import { DashboardComponent } from './Auth/components/dashboard/dashboard.component';
+import { DashboardComponent } from './Reportes/dashboard/dashboard.component';
 import { WelcomeComponent } from './Auth/components/welcome/welcome.component';
-import { LocationsComponent } from './Auth/components/locations/locations.component';
-import { DevicesComponent } from './Auth/components/devices/devices.component';
-import { ReportComponent } from './Auth/components/report/report.component';
-import { ServerComponent } from './Auth/components/servers/server.component';
-import { MqttComponent } from './Auth/components/mqtt/mqtt.component';
-import { UsersComponent } from './Auth/components/users/users.component';
+import { LocationsComponent } from './IOT/iotinfraestructura/locations/locations.component';
+import { DevicesComponent } from './IOT/iotinfraestructura/devices/devices.component';
+import { ReportComponent } from './Reportes/report/report.component';
+import { ServerComponent } from './IOT/iotinfraestructura/servers/server.component';
+import { MqttComponent } from './IOT/iotinfraestructura/mqtt/mqtt.component';
+import { UsersComponent } from './User/users/users.component';
 import { AuthGuard } from './Auth/guards/auth.guard';
 import { BodyComponent } from './Shared/body/body.component';
+import { LoginComponent } from './Auth/components/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,9 +27,10 @@ export const routes: Routes = [
       { path: 'report', component: ReportComponent },
       { path: 'server', component: ServerComponent },
       { path: 'mqtt', component: MqttComponent },
+      { path: 'users', component: UsersComponent },
     ],
   },
 
-  { path: 'users', component: UsersComponent },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
